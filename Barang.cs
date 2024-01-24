@@ -6,4 +6,3 @@
         public int rating { get; set; }
     }
 }
-fdsa

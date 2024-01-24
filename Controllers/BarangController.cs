@@ -7,26 +7,47 @@ namespace TestAsprak.Controllers
     [ApiController]
     public class BarangController : ControllerBase
     {
-        /*
+ 
         [HttpGet]
         public IEnumerable<Barang> Get()
         {
-            // return list barang
-        }*/
+            JsonLibrary.check();
+            List<Barang> barangList = JsonLibrary.deserialize();
+            return barangList;
+        }
         [HttpPost]
         public void Post([FromBody] Barang barang)
         {
+            List<Barang> barangList = JsonLibrary.deserialize();
+            barangList.Add(barang);
+            JsonLibrary.serialize(barangList);
 
         }
         [HttpPut("{nama}")]
         public void Put(string nama, Barang barang)
         {
-            //update ke dalam list nya
+            List<Barang> barangList = JsonLibrary.deserialize();
+            foreach (Barang bar in barangList)
+            {
+                if(bar.nama == nama)
+                {
+                    bar.rating = barang.rating;
+                }
+            }
+            JsonLibrary.serialize(barangList);
         }
         [HttpDelete("{nama}")]
         public void Delete(string nama)
         {
-            //hapus dari list nya
+            List<Barang> barangList = JsonLibrary.deserialize();
+            foreach (Barang bar in barangList)
+            {
+                if (bar.nama == nama)
+                {
+                    barangList.Remove(bar);
+                }
+            }
+            JsonLibrary.serialize(barangList);
         }
     }
 }
