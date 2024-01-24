@@ -1,0 +1,6 @@
+@TestAsprak_HostAddress = http://localhost:5196
+
+GET {{TestAsprak_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
